@@ -5,9 +5,7 @@ export default function Hero() {
   return (
     
     <div className="card">
-      <h1 style={{ fontSize: "26px", fontWeight: "bold", position: "relative",
-    zIndex: 2, }}>
-        
+      <h1 style={{ fontSize: "26px", fontWeight: "bold" }}>
         {profile.name}
       </h1>
 
