@@ -47,15 +47,15 @@ function PortfolioLayout() {
 
   // same educational data you were passing earlier
   const education = [
-    { school: "VIT Bhopal", degree: "MCA", period: "2024 - Present", details: "Web & DB Engineering" },
-    { school: "ABC College", degree: "B.Sc.", period: "2021 - 2024", details: "Graduated with Distinction" },
-    { school: "ABC College", degree: "B.Sc.", period: "2021 - 2024", details: "Graduated with Distinction" },
-    { school: "ABC College", degree: "B.Sc.", period: "2021 - 2024", details: "Graduated with Distinction" }
+    { school: "VIT Bhopal University", degree: "MCA", period: "2024 - Present", details: "Web & DB Engineering" },
+    { school: "Siksha 'O' Anusandhan University", degree: "B.Sc.", period: "2020 - 2023", details: "Graduated " },
+    { school: "St Joseph's College ", degree: "Higher Secondary", period: "2020", details: "Graduated with Distinction" },
+    { school: "St Joseph's College", degree: "Secondary", period: "2018", details: "Graduated with Distinction" }
   ];
 
   const achievements = [
-    "Winner — Hackathon XYZ 2024",
-    "First Class with Distinction — B.Sc."
+    "TCS CodeVita Round 1 Qualified [Rank-634]",
+    "Adobe Hackathon Round 1 Qualified"
   ];
 
 const downloadResume = () => {
