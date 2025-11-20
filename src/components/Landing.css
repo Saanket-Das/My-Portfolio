@@ -1,287 +1,77 @@
-/* src/components/Landing.css
-   Particle network background + left-aligned portrait + copy on right.
-*/
-
-.landing-hero {
-  position: relative;
-  min-height: 100vh;
-  width: 100%;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-}
-
-/* ParticleNetwork wrapper sits in DOM via component; ensure it's behind content */
-.pn-wrapper {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-}
-
-/* overlay for readability */
-/* overlay for readability + black gradient */
-.landing-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 1;
-
-  /* Black → transparent vertical fade */
-  background: linear-gradient(
-      180deg,
-      rgba(0, 0, 0, 0.35) 0%,      /* top dark */
-      rgba(0, 0, 0, 0.20) 30%,     /* mid fade */
-      rgba(0, 0, 0, 0.05) 70%,     /* lighter */
-      rgba(0, 0, 0, 0.00) 100%     /* bottom neutral */
-  ),
-  /* Keep your original white wash so text stays readable */
-  linear-gradient(
-      180deg,
-      rgba(255,255,255,0.75) 0%,
-      rgba(255,255,255,0.85) 60%,
-      rgba(255,255,255,0.94) 100%
-  );
-
-  pointer-events: none;
-}
-
-/* container for left photo / right content */
-.landing-inner {
-  position: relative;
-  z-index: 2;
-  width: min(1200px, 94vw);
-  display: grid;
-  grid-template-columns: 360px 1fr;
-  gap: 48px;
-  align-items: center;
-  padding: 48px;
-}
-
-/* LEFT: portrait column */
-.landing-left {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.photo-wrap {
-  position: relative;
-  width: 320px;
-  height: 320px;
-  display: grid;
-  place-items: center;
-}
-
-.photo-large {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 18px;
-  box-shadow: 0 32px 80px rgba(10,18,40,0.12);
-  border: 8px solid rgba(255,255,255,0.95);
-  transform: translateZ(0);
-}
-
-/* decorative ring (soft glow) */
-.photo-ring {
-  position: absolute;
-  width: 84%;
-  height: 84%;
-  border-radius: 14px;
-  pointer-events: none;
-  box-shadow: 0 16px 48px rgba(61,121,252,0.06), inset 0 2px 8px rgba(255,255,255,0.5);
-  filter: blur(6px);
-}
-
-/* RIGHT: text area */
-.landing-right {
-  color: #071135;
-  text-align: left;
-}
-
-/* big name */
-.landing-title {
-  font-size: clamp(34px, 4.8vw, 56px);
-  line-height: 1;
-  margin: 0 0 10px;
-  font-weight: 800;
-  color: #071235;
-}
-
-/* tagline + cursor */
-.landing-tagline {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  margin-bottom: 14px;
-  font-weight: 700;
-  color: #1560ff;
-  font-size: clamp(16px, 2.2vw, 20px);
-}
-.typewriter { color: #1560ff; }
-.cursor { color: #1560ff; animation: blink 900ms steps(2,start) infinite; }
-@keyframes blink { 50% { opacity: 0; } }
-
-/* subline */
-.landing-sub {
-  margin: 8px 0 26px;
-  color: rgba(8,20,40,0.66);
-  font-size: clamp(14px, 1.8vw, 16px);
-  max-width: 720px;
-}
-
-/* CTA: keep stable width to prevent jump when spinner appears */
-.landing-cta { display: flex; gap: 12px; align-items: center; }
-.btn-portfolio-hero {
-  border: none;
-  padding: 14px 28px;
-  border-radius: 999px;
-  background: linear-gradient(90deg,#2575fc,#3ad5ff);
-  color: white;
-  font-weight: 700;
-  font-size: 16px;
-  cursor: pointer;
-  box-shadow: 0 18px 40px rgba(37,117,252,0.18);
-  transition: transform .12s ease, box-shadow .12s ease, opacity .12s;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-
-  /* KEY FIX: stable width so replacing text with spinner doesn't jump layout */
-  min-width: 150px;
-  min-height: 48px;
-}
-.btn-portfolio-hero:active { transform: translateY(1px); }
-.btn-portfolio-hero:disabled { opacity: .9; cursor: default; transform: none; }
-
-/* spinner used inside button */
-.btn-loader {
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  border: 2px solid rgba(255,255,255,0.6);
-  border-left-color: rgba(255,255,255,1);
-  animation: spin 700ms linear infinite;
-  display: inline-block;
-}
-@keyframes spin { to { transform: rotate(360deg); } }
-
-/* responsive: single column with portrait above text */
+/* === Mobile fixes: better centered hero, smaller portrait, stable CTA === */
 @media (max-width: 960px) {
-  .landing-inner { grid-template-columns: 1fr; gap: 26px; padding: 28px; }
-  .landing-left { order: -1; }
-  .photo-wrap { width: 220px; height: 220px; }
-  .landing-right { text-align: center; }
-}
-
-/* small screens: tighten spacing */
-@media (max-width: 520px) {
-  .landing-inner { padding: 18px; }
-  .photo-wrap { width: 160px; height: 160px; }
-  .landing-title { font-size: 26px; }
-  .landing-sub { font-size: 14px; }
-}
-/* Mobile/tight-screen improvements for Landing page */
-/* Put this at the end of Landing.css */
-
-@media (max-width: 960px) {
-  /* Make sure the header doesn't overlap the landing content */
-  .landing-hero {
-    padding-top: 84px; /* adjust if your header height is different */
-    min-height: calc(100vh - 84px);
-    align-items: flex-start; /* let content start below header */
-  }
-
+  /* make the layout single column and center content */
   .landing-inner {
     grid-template-columns: 1fr;
     gap: 18px;
-    padding: 28px 20px;
-    width: 95vw;
-    margin: 0 auto;
-    align-items: center;
+    padding: 28px;
+    width: min(980px, 94vw);
+    justify-items: center;
   }
 
-  /* center-align everything so it looks good on tall mobile screens */
-  .landing-left,
-  .landing-right {
+  /* portrait above the text */
+  .landing-left {
+    order: -1;
     justify-content: center;
-    text-align: center;
+    align-items: center;
+    width: 100%;
   }
 
-  /* smaller photo on mobile and keep drop shadow */
+  /* shrink the photo and ring so it doesn't push things */
   .photo-wrap {
-    width: 180px;
-    height: 180px;
+    width: 160px !important;
+    height: 160px !important;
+    margin: 0 auto;
   }
-
   .photo-large {
-    border-radius: 12px;
-    box-shadow: 0 22px 60px rgba(10,18,40,0.12);
+    width: 100%;
+    height: 100%;
+    border-radius: 14px;
+    box-shadow: 0 28px 56px rgba(10,18,40,0.12);
     border: 6px solid rgba(255,255,255,0.95);
   }
+  .photo-ring { width: 86%; height: 86%; filter: blur(5px); }
 
-  /* reduce decorative ring blur for small screens */
-  .photo-ring {
-    width: 86%;
-    height: 86%;
-    filter: blur(4px);
+  /* center the text column */
+  .landing-right {
+    text-align: center;
+    padding: 0 6px;
   }
 
-  /* scale down title and keep readable line-height */
+  /* smaller headline so it wraps nicely */
   .landing-title {
-    font-size: clamp(24px, 7.2vw, 34px); /* responsive */
+    font-size: clamp(22px, 6.2vw, 34px);
     line-height: 1.05;
-    margin-top: 4px;
+    margin-top: 2px;
   }
 
+  /* tagline + cursor center */
   .landing-tagline {
     justify-content: center;
     font-size: clamp(14px, 3.6vw, 16px);
-    margin-bottom: 10px;
   }
-
-  .typewriter, .cursor { font-weight: 700; }
 
   .landing-sub {
-    margin: 8px 0 18px;
-    color: rgba(8,20,40,0.72);
-    font-size: 14px;
-    max-width: 92%;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 8px auto 22px;
+    font-size: 15px;
+    max-width: 86%;
   }
 
+  /* CTA: keep centered and wider for touch */
   .landing-cta { justify-content: center; }
-
-  /* keep CTA stable and stacked nicely */
   .btn-portfolio-hero {
-    min-width: 140px;
+    min-width: 190px;
+    min-height: 46px;
     padding: 12px 20px;
     font-size: 15px;
-  }
-
-  /* Reduce particle visual weight on small screens so text stands out */
-  .pn-wrapper {
-    pointer-events: none;
-  }
-  /* If ParticleNetwork renders a canvas or svg use these rules to lower opacity */
-  .pn-wrapper canvas,
-  .pn-wrapper svg {
-    opacity: 0.08 !important; /* low so text/photo remain prominent */
-    filter: blur(.2px);
+    box-shadow: 0 18px 40px rgba(37,117,252,0.18);
   }
 }
 
-/* Extra small screens (phones) - tighten up spacing */
+/* tighter sizes on very small phones */
 @media (max-width: 420px) {
-  .landing-inner { padding: 18px 14px; gap: 14px; width: 96vw; }
-  .photo-wrap { width: 140px; height: 140px; }
-  .landing-title { font-size: 22px; }
-  .landing-sub { font-size: 13px; }
-  .btn-portfolio-hero { min-width: 120px; padding: 10px 16px; font-size: 14px; }
-  .pn-wrapper canvas,
-  .pn-wrapper svg { opacity: 0.06 !important; }
+  .photo-wrap { width: 136px !important; height: 136px !important; }
+  .landing-title { font-size: 20px; }
+  .landing-sub { font-size: 14px; max-width: 92%; }
+  .btn-portfolio-hero { min-width: 160px; padding: 10px 16px; font-size: 14px; }
 }
