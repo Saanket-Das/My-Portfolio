@@ -46,7 +46,10 @@
   max-width: 420px;
   text-align: center;
 }
-
+.TAGLINE_WORD{
+  font-size: 36px;
+  font-weight: 800;
+}
 .landing-title {
   font-size: 36px;
   font-weight: 800;
