@@ -3,8 +3,11 @@ import { profile } from "../data/profile";
 
 export default function Hero() {
   return (
+    
     <div className="card">
-      <h1 style={{ fontSize: "26px", fontWeight: "bold" }}>
+      <h1 style={{ fontSize: "26px", fontWeight: "bold", position: "relative",
+    zIndex: 2, }}>
+        
         {profile.name}
       </h1>
 
@@ -12,5 +15,6 @@ export default function Hero() {
         {profile.summary}
       </p>
     </div>
+    
   );
 }
