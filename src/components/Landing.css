@@ -184,3 +184,104 @@
   .landing-title { font-size: 26px; }
   .landing-sub { font-size: 14px; }
 }
+/* Mobile/tight-screen improvements for Landing page */
+/* Put this at the end of Landing.css */
+
+@media (max-width: 960px) {
+  /* Make sure the header doesn't overlap the landing content */
+  .landing-hero {
+    padding-top: 84px; /* adjust if your header height is different */
+    min-height: calc(100vh - 84px);
+    align-items: flex-start; /* let content start below header */
+  }
+
+  .landing-inner {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 28px 20px;
+    width: 95vw;
+    margin: 0 auto;
+    align-items: center;
+  }
+
+  /* center-align everything so it looks good on tall mobile screens */
+  .landing-left,
+  .landing-right {
+    justify-content: center;
+    text-align: center;
+  }
+
+  /* smaller photo on mobile and keep drop shadow */
+  .photo-wrap {
+    width: 180px;
+    height: 180px;
+  }
+
+  .photo-large {
+    border-radius: 12px;
+    box-shadow: 0 22px 60px rgba(10,18,40,0.12);
+    border: 6px solid rgba(255,255,255,0.95);
+  }
+
+  /* reduce decorative ring blur for small screens */
+  .photo-ring {
+    width: 86%;
+    height: 86%;
+    filter: blur(4px);
+  }
+
+  /* scale down title and keep readable line-height */
+  .landing-title {
+    font-size: clamp(24px, 7.2vw, 34px); /* responsive */
+    line-height: 1.05;
+    margin-top: 4px;
+  }
+
+  .landing-tagline {
+    justify-content: center;
+    font-size: clamp(14px, 3.6vw, 16px);
+    margin-bottom: 10px;
+  }
+
+  .typewriter, .cursor { font-weight: 700; }
+
+  .landing-sub {
+    margin: 8px 0 18px;
+    color: rgba(8,20,40,0.72);
+    font-size: 14px;
+    max-width: 92%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .landing-cta { justify-content: center; }
+
+  /* keep CTA stable and stacked nicely */
+  .btn-portfolio-hero {
+    min-width: 140px;
+    padding: 12px 20px;
+    font-size: 15px;
+  }
+
+  /* Reduce particle visual weight on small screens so text stands out */
+  .pn-wrapper {
+    pointer-events: none;
+  }
+  /* If ParticleNetwork renders a canvas or svg use these rules to lower opacity */
+  .pn-wrapper canvas,
+  .pn-wrapper svg {
+    opacity: 0.08 !important; /* low so text/photo remain prominent */
+    filter: blur(.2px);
+  }
+}
+
+/* Extra small screens (phones) - tighten up spacing */
+@media (max-width: 420px) {
+  .landing-inner { padding: 18px 14px; gap: 14px; width: 96vw; }
+  .photo-wrap { width: 140px; height: 140px; }
+  .landing-title { font-size: 22px; }
+  .landing-sub { font-size: 13px; }
+  .btn-portfolio-hero { min-width: 120px; padding: 10px 16px; font-size: 14px; }
+  .pn-wrapper canvas,
+  .pn-wrapper svg { opacity: 0.06 !important; }
+}
