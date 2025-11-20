@@ -1,0 +1,23 @@
+/* ParticleNetwork.css - stronger visible network */
+.pn-wrapper {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  contain: paint;
+}
+.pn-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 0;
+  will-change: transform;
+  background: transparent;
+}
+@media (prefers-reduced-motion: reduce) {
+  .pn-canvas { opacity: 0.98; }
+}

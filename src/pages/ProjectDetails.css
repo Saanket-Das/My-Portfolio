@@ -1,0 +1,6 @@
+.project-header{ margin-bottom:18px; }
+.project-header h1{ font-size:28px; margin:0 0 8px; }
+.project-header .tag{ margin-right:6px; padding:6px 8px; background:#f3f5f8; border-radius:999px; font-size:12px; }
+.gallery{ display:grid; grid-template-columns: repeat(auto-fill,minmax(260px,1fr)); gap:14px; }
+.gallery-item img{ width:100%; height:180px; object-fit:cover; border-radius:10px; box-shadow:0 8px 28px rgba(10,20,40,0.06); }
+.back-btn{ margin-bottom:12px; background:none; border:0; color:#1560ff; cursor:pointer; font-weight:700; }
