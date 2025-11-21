@@ -20,6 +20,8 @@ import "./App.css"; // optional - keep your global styles
 import Landing from "./components/Landing";
 import LoadingScreen from "./components/LoadingScreen";
 import CertificationsPage from "./pages/CertificationsPage";
+import Loading from "./components/Loading";
+import "./components/Loading.css";
 
 export default function App() {
   return (
