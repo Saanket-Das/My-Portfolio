@@ -11,6 +11,9 @@ import ProjectsPage from "./pages/ProjectsPage";
 import ProjectDetails from "./pages/ProjectDetails";
 import ContactPage from "./pages/ContactPage";
 import resumePDF from "./assets/resume.pdf";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter as BrowserRouter, Routes, Route } from "react-router-dom";
+
 
 import ParticleNetwork from "./components/ParticleNetwork"; // the network background
 import "./App.css"; // optional - keep your global styles
