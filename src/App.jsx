@@ -1,5 +1,5 @@
 // src/App.jsx
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
@@ -11,7 +11,7 @@ import ProjectsPage from "./pages/ProjectsPage";
 import ProjectDetails from "./pages/ProjectDetails";
 import ContactPage from "./pages/ContactPage";
 import resumePDF from "./assets/resume.pdf";
-import { HashRouter as BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter as BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 
 import ParticleNetwork from "./components/ParticleNetwork"; // the network background
 import "./App.css"; // optional - keep your global styles
@@ -20,21 +20,18 @@ import "./App.css"; // optional - keep your global styles
 import Landing from "./components/Landing";
 import LoadingScreen from "./components/LoadingScreen";
 import CertificationsPage from "./pages/CertificationsPage";
-import Loading from "./components/LoadingScreen";
-import "./components/LoadingScreen.css";
+import Loading from "./components/Loading";
+import "./components/Loading.css";
 
 export default function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<LandingWrapper />} />
-        <Route path="/portfolio/*" element={<PortfolioLayout />} />
-        <Route path="*" element={<LandingWrapper />} />
-      </Routes>
+      <RouterWithLoader />
     </BrowserRouter>
   );
 }
 
+/* Keep exact LandingWrapper behavior you had */
 function LandingWrapper() {
   const [loading, setLoading] = useState(true);
 
@@ -45,10 +42,10 @@ function LandingWrapper() {
   );
 }
 
+/* PortfolioLayout preserved exactly (only minor formatting) */
 function PortfolioLayout() {
   const [theme, setTheme] = useState("light");
 
-  // same educational data you were passing earlier
   const education = [
     { school: "VIT Bhopal University", degree: "MCA", period: "2024 - Present", details: "Yet To Graduate" },
     { school: "Siksha 'O' Anusandhan University", degree: "BCA.", period: "2020 - 2023", details: "Graduated " },
@@ -62,7 +59,6 @@ function PortfolioLayout() {
   ];
 
   const downloadResume = () => {
-    // Uses imported resumePDF (works when file is in src/assets and Vite handles it)
     const a = document.createElement("a");
     a.href = resumePDF;
     a.download = "Sanket_Kumar_Das_Resume.pdf";
@@ -95,5 +91,43 @@ function PortfolioLayout() {
         <Footer />
       </div>
     </div>
+  );
+}
+
+/* RouterWithLoader: shows a full-screen loader on initial mount and briefly on route changes */
+function RouterWithLoader() {
+  const location = useLocation();
+  const [loading, setLoading] = useState(true); // show on first mount/reload
+  const [firstMountDone, setFirstMountDone] = useState(false);
+
+  // initial mount: show loader for a bit, then hide
+  useEffect(() => {
+    const t = setTimeout(() => {
+      setLoading(false);
+      setFirstMountDone(true);
+    }, 700); // initial loader duration (ms) — tweak if desired
+    return () => clearTimeout(t);
+  }, []);
+
+  // on every route change after initial mount, flash loader briefly
+  useEffect(() => {
+    if (!firstMountDone) return; // skip the very first location change while initial loader is active
+    setLoading(true);
+    const t = setTimeout(() => setLoading(false), 450); // route-change loader duration (ms)
+    return () => clearTimeout(t);
+  }, [location.pathname, firstMountDone]);
+
+  return (
+    <>
+      {/* global loader; your Loading component expects `visible` prop */}
+      <Loading visible={loading} />
+
+      {/* routes (keep the same structure you had) */}
+      <Routes>
+        <Route path="/" element={<LandingWrapper />} />
+        <Route path="/portfolio/*" element={<PortfolioLayout />} />
+        <Route path="*" element={<LandingWrapper />} />
+      </Routes>
+    </>
   );
 }
