@@ -2,8 +2,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ParticleNetwork from "./ParticleNetwork";
+import LoadingScreen from "./LoadingScreen"; // ← ADD THIS
 import "./Landing.css";
-import profilePhoto from "../assets/passport.jpeg"; // adjust if different filename
+import profilePhoto from "../assets/passport.jpeg";
 
 const TAGLINE_WORDS = [
   "React • Java • SQL",
@@ -13,12 +14,14 @@ const TAGLINE_WORDS = [
 ];
 
 export default function Landing() {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);   // typing animation state
+  const [showLoader, setShowLoader] = useState(false); // NEW ← to show loading screen
   const [wordIndex, setWordIndex] = useState(0);
   const [displayed, setDisplayed] = useState("");
   const [typingForward, setTypingForward] = useState(true);
   const navigate = useNavigate();
 
+  // Typewriter effect
   useEffect(() => {
     let timer;
     const word = TAGLINE_WORDS[wordIndex];
@@ -41,6 +44,7 @@ export default function Landing() {
     return () => clearTimeout(timer);
   }, [displayed, typingForward, wordIndex]);
 
+  // Keyboard shortcut (Enter / Space)
   useEffect(() => {
     function onKey(e) {
       if ((e.key === "Enter" || e.key === " ") && !loading) {
@@ -49,26 +53,22 @@ export default function Landing() {
     }
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading]);
 
   function handleEnter() {
-    // show spinner and navigate after a short delay
-    setLoading(true);
+    setShowLoader(true);  // Show loading screen
 
-    // keep spinner for a bit to show transition; then navigate.
     setTimeout(() => {
-      // navigate to main portfolio route — change "/" to "/portfolio" if that's your route
       navigate("/portfolio");
-    }, 650);
+    }, 2000); // matches LoadingScreen duration
   }
+
+  // If loader is active → show loading screen only
+  if (showLoader) return <LoadingScreen />;
 
   return (
     <div className="landing-hero">
-      {/* Particle background behind everything */}
       <ParticleNetwork enabled={true} />
-
-      {/* translucent overlay to improve readability */}
       <div className="landing-overlay" />
 
       <div className="landing-inner" role="main">
@@ -95,13 +95,10 @@ export default function Landing() {
             <button
               className="btn-portfolio-hero"
               onClick={handleEnter}
-              disabled={loading}
-              aria-label="Enter portfolio"
-              aria-busy={loading ? "true" : "false"}
+              disabled={showLoader}
               type="button"
             >
-              {/* Keep width stable: spinner replaces text but button min-width prevents jump */}
-              {loading ? <span className="btn-loader" aria-hidden /> : "My Portfolio"}
+              {showLoader ? <span className="btn-loader" /> : "My Portfolio"}
             </button>
           </div>
         </section>
