@@ -47,7 +47,7 @@ function PortfolioLayout() {
 
   // same educational data you were passing earlier
   const education = [
-    { school: "VIT Bhopal University", degree: "MCA", period: "2024 - Present", details: "Web & DB Engineering" },
+    { school: "VIT Bhopal University", degree: "MCA", period: "2024 - Present", details: "Yet To Graduate" },
     { school: "Siksha 'O' Anusandhan University", degree: "BCA.", period: "2020 - 2023", details: "Graduated " },
     { school: "St Joseph's College ", degree: "Higher Secondary", period: "2020", details: "Graduated with Distinction" },
     { school: "St Joseph's College", degree: "Secondary", period: "2018", details: "Graduated with Distinction" }
