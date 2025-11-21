@@ -1,3 +1,4 @@
+// src/App.jsx
 import React, { useState } from "react";
 
 import Header from "./components/Header";
@@ -11,7 +12,6 @@ import ProjectDetails from "./pages/ProjectDetails";
 import ContactPage from "./pages/ContactPage";
 import resumePDF from "./assets/resume.pdf";
 import { HashRouter as BrowserRouter, Routes, Route } from "react-router-dom";
-
 
 import ParticleNetwork from "./components/ParticleNetwork"; // the network background
 import "./App.css"; // optional - keep your global styles
@@ -61,14 +61,16 @@ function PortfolioLayout() {
     "Adobe Hackathon Round 1 Qualified"
   ];
 
-const downloadResume = () => {
-  const a = document.createElement("a");
-  a.href = resumePDF;
-  a.download = "Sanket_Kumar_Das_Resume.pdf";
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-};
+  const downloadResume = () => {
+    // Uses imported resumePDF (works when file is in src/assets and Vite handles it)
+    const a = document.createElement("a");
+    a.href = resumePDF;
+    a.download = "Sanket_Kumar_Das_Resume.pdf";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  };
+
   return (
     <div className={theme === "dark" ? "dark-mode" : ""}>
       {/* Particle background only on portfolio pages */}
