@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
@@ -11,7 +10,6 @@ import ProjectsPage from "./pages/ProjectsPage";
 import ProjectDetails from "./pages/ProjectDetails";
 import ContactPage from "./pages/ContactPage";
 import resumePDF from "./assets/resume.pdf";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HashRouter as BrowserRouter, Routes, Route } from "react-router-dom";
 
 
