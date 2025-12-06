@@ -11,55 +11,49 @@ export default function ContactPage() {
         Feel free to reach out or check out my work here:
       </p>
 
-      {/* ICON ROW */}
+      {/* ICONS ONLY */}
       <div
         style={{
           display: "flex",
           justifyContent: "center",
-          gap: 50,
-          marginBottom: 20
+          gap: 40,
+          marginBottom: 10
         }}
       >
         {/* GitHub */}
         <a
           href="https://github.com/Saanket-Das"
-          className="social"
           target="_blank"
           rel="noopener noreferrer"
-          style={{ textAlign: "center" }}
+          className="social"
         >
           <FiGithub size={36} />
-          <div style={{ marginTop: 6 }}>GitHub</div>
         </a>
 
         {/* LinkedIn */}
         <a
           href="https://www.linkedin.com/in/sanket-kumar-das-598298229/"
-          className="social"
           target="_blank"
           rel="noopener noreferrer"
-          style={{ textAlign: "center" }}
+          className="social"
         >
           <FiLinkedin size={36} />
-          <div style={{ marginTop: 6 }}>LinkedIn</div>
         </a>
 
-        {/* Email */}
+        {/* Gmail */}
         <a
           href="mailto:sanketlives@gmail.com"
           className="social"
-          style={{ textAlign: "center" }}
         >
           <FiMail size={36} />
-          <div style={{ marginTop: 6 }}>Email</div>
         </a>
       </div>
 
-      <p style={{ textAlign: "center", marginTop: 10 }}>
-        You can also email me directly at{" "}
+      <p style={{ textAlign: "center" }}>
+        Email:{" "}
         <a href="mailto:sanketlives@gmail.com" style={{ fontWeight: 600 }}>
           sanketlives@gmail.com
-        </a>.
+        </a>
       </p>
     </div>
   );
