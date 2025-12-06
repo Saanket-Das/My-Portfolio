@@ -1,69 +1,95 @@
-// src/pages/ContactPage.jsx  — paste & save (overwrite existing)
-import React, { useRef, useState } from "react";
+// src/pages/ContactPage.jsx
+import React from "react";
+import { FiGithub, FiLinkedin, FiMail } from "react-icons/fi";
 
 export default function ContactPage() {
-  const formRef = useRef(null);
-  const [status, setStatus] = useState(null);
-  const [sending, setSending] = useState(false);
-
-  const fallbackMailTo = ({ from_name, from_email, message }) => {
-    const to = "chaoslives01@gmail.com";
-    const subject = encodeURIComponent(`Portfolio Contact from ${from_name || "Visitor"}`);
-    const body = encodeURIComponent(`Name: ${from_name || ""}\nEmail: ${from_email || ""}\n\n${message || ""}`);
-    window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setSending(true);
-    setStatus(null);
-
-    const f = new FormData(formRef.current);
-    const from_name = f.get("from_name");
-    const from_email = f.get("from_email");
-    const message = f.get("message");
-
-    // immediate fallback (no network dependency)
-    setTimeout(() => {
-      setStatus({ ok: true, msg: "Opening your email client..." });
-      fallbackMailTo({ from_name, from_email, message });
-      setSending(false);
-    }, 250);
-  };
-
   return (
-    <div className="card" style={{ padding: 18 }}>
-      <h2 style={{ marginTop: 0 }}>Contact Me</h2>
+    <div className="card" style={{ padding: 24 }}>
+      <h2 style={{ marginTop: 0, marginBottom: 8 }}>Contact</h2>
+      <p style={{ marginTop: 0, marginBottom: 24, color: "#64748b" }}>
+        Feel free to reach out or check out my work here:
+      </p>
 
-      <form ref={formRef} onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-        <input name="from_name" type="text" placeholder="Your Name" required />
-        <input name="from_email" type="email" placeholder="Your Email" required />
-        <textarea name="message" placeholder="Message" rows={6} required />
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          gap: 32,
+          padding: "24px 0 8px",
+        }}
+      >
+        {/* GitHub */}
+        <a
+          href="https://github.com/Saanket-Das"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            textDecoration: "none",
+            color: "#0f172a",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 6,
+          }}
+        >
+          <FiGithub size={32} />
+          <span style={{ fontSize: 14 }}>GitHub</span>
+        </a>
 
-        <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-          <button className="btn-primary" type="submit" disabled={sending}>
-            {sending ? "Opening…" : "Send Message"}
-          </button>
+        {/* LinkedIn */}
+        <a
+          href="https://www.linkedin.com/in/sanket-kumar-das-598298229/"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            textDecoration: "none",
+            color: "#0f172a",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 6,
+          }}
+        >
+          <FiLinkedin size={32} />
+          <span style={{ fontSize: 14 }}>LinkedIn</span>
+        </a>
 
-          <button
-            type="button"
-            className="btn btn-outline"
-            onClick={() => fallbackMailTo({ from_name: "", from_email: "", message: "" })}
-          >
-            Open Email Client
-          </button>
-        </div>
+        {/* Email (opens Gmail compose) */}
+        <a
+          href="https://mail.google.com/mail/?view=cm&fs=1&to=sanketlives@gmail.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            textDecoration: "none",
+            color: "#0f172a",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 6,
+          }}
+        >
+          <FiMail size={32} />
+          <span style={{ fontSize: 14 }}>Email</span>
+        </a>
+      </div>
 
-        {status && (
-          <div style={{ marginTop: 8, color: status.ok ? "green" : "crimson" }}>
-            {status.msg}
-          </div>
-        )}
-
-        <small style={{ color: "#64748b" }}>
-          Quick fallback: this opens your email client. (Temporary safe page — EmailJS integration can be restored later.)
-        </small>
-      </form>
+      <p
+        style={{
+          marginTop: 16,
+          textAlign: "center",
+          fontSize: 13,
+          color: "#94a3b8",
+        }}
+      >
+        You can also email me directly at{" "}
+        <a
+          href="mailto:sanketlives@gmail.com"
+          style={{ color: "#2563eb", textDecoration: "none", fontWeight: 500 }}
+        >
+          sanketlives@gmail.com
+        </a>
+        .
+      </p>
     </div>
   );
 }
